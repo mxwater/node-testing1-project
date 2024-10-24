@@ -131,13 +131,13 @@ class Car {
   drive(distance) {
     const maxDistance = this.tank * this.mpg; 
     if (distance <= maxDistance) {
-      this.odometer += distance;
-      this.tank -= distance / this.mpg; 
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance / this.mpg);
     } else {
-      this.odometer += maxDistance;
-      this.tank = 0; 
+      this.tank = 0
+      this.odometer = this.odometer + maxDistance
     }
-    return this.odometer;
+    return this.odometer
   }
 
 
@@ -155,14 +155,17 @@ class Car {
 
 
   refuel(gallons) {
-    if (this.tank < this.tankSize) {
-      const newFuelLevel = this.tank + gallons;
-      this.tank = newFuelLevel > this.tankSize ? this.tankSize : newFuelLevel;
+    const gallonsThatFit = this.tankSize - this.tank
+    if (gallons <= gallonsThatFit) {
+      this.tank = this.tank + gallons
+    } else {
+      this.tank = this.tankSize
     }
-    return this.tank * this.mpg; 
-  }
-  
+    return this.tank * this.mpg
 }
+}
+
+
 
 /**
  * [Exercise 7] Asynchronously resolves whether a number is even
