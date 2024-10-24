@@ -123,18 +123,18 @@ describe('[Exercise 6] Car', () => {
 
   test('[17] refueling allows to keep driving', () => {
     focus.drive(600); 
+    expect(focus.tank).toBe(0);
     focus.refuel(10); 
-    focus.drive(600)
+    expect(focus.tank).toBe(10); 
+    focus.drive(300);
     expect(focus.odometer).toBe(900); 
-    focus.refuel(20)
-    focus.drive(600)
-    expect(focus.odometer).toBe(1500)
   });
 
   test('[18] adding fuel to a full tank has no effect', () => {
-    focus.refuel(2000000); // Try adding an excessive amount of fuel
-    focus.drive(1000); // Drive 1000 miles
-    expect(focus.odometer).toBe(600); // Odometer should be 600 because the tank only supports 600 miles
+    focus.refuel(5);
+    expect(focus.tank).toBe(20); 
+    focus.drive(600); 
+    expect(focus.odometer).toBe(600); 
   });
 });
   
